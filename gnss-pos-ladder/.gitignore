@@ -1,0 +1,46 @@
+# data & binary products (download with scripts/00_fetch_data.py)
+data/raw/
+data/rinex/
+data/products/
+*.crx
+*.rnx
+*.obs
+*.nav
+*.sp3
+*.clk
+*.erp
+*.bia
+*.Z
+*.gz
+*.zip
+
+# results regenerable
+results/**/*.png
+results/**/*.csv
+results/**/*.pos
+results/**/*.txt
+results/**/*.log
+!results/.gitkeep
+!results/**/*.json
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# local secrets (Earthdata etc., optional)
+.netrc
+*.netrc
+credentials.*

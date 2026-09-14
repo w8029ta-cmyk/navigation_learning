@@ -1,0 +1,25 @@
+{
+  "n": 2820,
+  "n_fixed": 2700,
+  "fix_rate": 0.9574468085106383,
+  "n_sessions": 45,
+  "mean_enu_m": [
+    -0.3863330604812738,
+    0.19342771458617503,
+    -0.4211422111282606
+  ],
+  "rms_enu_m": [
+    0.5597855540359932,
+    0.527646134286026,
+    1.5162273878261165
+  ],
+  "rms_3d_m": 1.7002105167091455,
+  "horizontal_rms_m": 0.7692660850020434,
+  "phase_residual_rms_m": 0.10150139501114232,
+  "mode": "fixed|ref=G06|namb=7|rms=0.050|frac=0.195",
+  "static_session": true,
+  "static_ekf": false,
+  "baseline_mean_m": 3.5209109603699114,
+  "approx_baseline_m": 3.01127410581712,
+  "baseline_err_mean_m": 0.5096368545527912
+}

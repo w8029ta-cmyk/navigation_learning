@@ -1,0 +1,68 @@
+# gnss-pos-ladder 实验配置 —— 改这里，不要改得到处都是魔法数
+experiment:
+  name: "ladder-2026doy200-wuhn-wuh2"
+  # 2026-07-19
+  year: 2026
+  doy: 200
+  systems: ["G", "C"]   # GPS + BDS only
+
+stations:
+  rover: "WUH2"
+  base: "WUHN"          # 同城短基线，Stage B 主场景
+  spp_station: "WUH2"   # Stage A/C 默认单站
+
+paths:
+  # 指向你已经下载好的 RTKLIB（不要拷进本仓库）
+  rtklib_bin: "C:/Users/26976/Desktop/项目/rtklib_2.4.2/bin"
+  data_root: "data"
+  results_root: "results"
+
+data:
+  # 实测：本机用 Python ftplib 可匿名登录；系统自带 FTP 客户端可能 502
+  primary_host: "igs.gnsswhu.cn"
+  mirrors:
+    - host: "igs.gnsswhu.cn"
+      kind: "ftp"
+      root: "/pub/gps"
+  products:
+    # CODE MGEX final：含 BDS，适合本项目 GPS+BDS 设定
+    sp3_prefix: "COD0MGXFIN"
+    clk_prefix: "COD0MGXFIN"
+    erp_prefix: "COD0MGXFIN"
+    bia_prefix: "COD0MGXFIN"
+  broadcast:
+    preferred: "BRDM00DLR_S"   # 混合导航电文
+    fallback: "BRDC00IGS_R"
+
+spp:
+  elev_mask_deg: 15.0
+  sample_every_n: 10         # 30s 采样 → 约 5 min 一个解，先跑通再加密
+  max_epochs: 0
+  # false：单频+Klobuchar（对齐 RTKLIB ionoopt=brdc）；true：双频 IF（噪声更大）
+  use_if_combination: false
+  estimator: "wls"
+
+rtk:
+  elev_mask_deg: 15.0
+  max_epochs: 0
+  sample_every_n: 1          # 载波固定需要更密采样；会话长度见 session_epochs
+  session_epochs: 60         # 约 30 min @ 30 s
+  use_ekf: false             # true=连续EKF+LAMBDA（实验）；false=会话固定（默认稳）
+  mode: "static"
+  freqs: ["C1C", "C2W", "C2I", "L1C", "L2W", "L2I"]
+
+ppp:
+  elev_mask_deg: 10.0
+  max_epochs: 0
+  sample_every_n: 10         # 与对照 300s 同量级；LS 版不必 1
+  process_noise:
+    pos_static: 1.0e-4
+    clock: 100.0
+    tropo: 1.0e-4
+  converge_minutes: 60
+
+verify:
+  enable_rtklib: true
+  spp_pos_mode: "single"
+  rtk_pos_mode: "static"
+  ppp_pos_mode: "ppp-static"

@@ -1,0 +1,27 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.pytest_cache/
+
+# Secrets
+.netrc
+*.netrc
+credentials.*
+*.pem
+*.key
+
+# Personal documents (do not upload)
+王明的健康证.pdf
+王明-安徽理工大学-导航工程-简历.docx
+计算机二级c语言证书.pdf
